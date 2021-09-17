@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
-class ValueText extends StatelessWidget {
+class ValueText extends StatefulWidget {
+  final String value;
+  final Color textFunctionColor;
+
   const ValueText({
     Key? key,
     required this.value,
     required this.textFunctionColor,
   }) : super(key: key);
 
-  final int value;
-  final Color textFunctionColor;
+  @override
+  State<ValueText> createState() => _ValueTextState();
+}
 
+class _ValueTextState extends State<ValueText> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,10 +24,10 @@ class ValueText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            value.toString(),
+            widget.value,
             style: TextStyle(
               fontSize: 60,
-              color: textFunctionColor,
+              color: widget.textFunctionColor,
             ),
           ),
         ],

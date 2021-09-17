@@ -18,7 +18,19 @@ class _MyHomePageState extends State<MyHomePage> {
   final Color buttonColor = const Color(0x2E2E2E2E);
   final Color textFunctionColor = const Color(0xFFFF9800);
   final Color textNormalColor = Colors.white;
-  int value = 0;
+  String value = '';
+
+  void buttonClick(String textValue) {
+    setState(() {
+      value += textValue;
+    });
+  }
+
+  void clearClick(String textValue) {
+    setState(() {
+      value = '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,24 +58,28 @@ class _MyHomePageState extends State<MyHomePage> {
                       bgColor: buttonColor,
                       textColor: textFunctionColor,
                       isNormalButton: true,
+                      callback: clearClick,
                     ),
                     CalcuButtons(
                       text: "+/-",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "%",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "÷",
                       bgColor: operatorColor,
                       textColor: textFunctionColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                   ],
                 ),
@@ -76,24 +92,28 @@ class _MyHomePageState extends State<MyHomePage> {
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "8",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "9",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "x",
                       bgColor: operatorColor,
                       textColor: textFunctionColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                   ],
                 ),
@@ -106,24 +126,28 @@ class _MyHomePageState extends State<MyHomePage> {
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "5",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "6",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "-",
                       bgColor: operatorColor,
                       textColor: textFunctionColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                   ],
                 ),
@@ -136,24 +160,28 @@ class _MyHomePageState extends State<MyHomePage> {
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "2",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "3",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "+",
                       bgColor: operatorColor,
                       textColor: textFunctionColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                   ],
                 ),
@@ -166,18 +194,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: ".",
                       bgColor: buttonColor,
                       textColor: textNormalColor,
                       isNormalButton: true,
+                      callback: buttonClick,
                     ),
                     CalcuButtons(
                       text: "=",
                       bgColor: operatorColor,
                       textColor: textFunctionColor,
                       isNormalButton: false,
+                      callback: buttonClick,
                     ),
                   ],
                 ),
