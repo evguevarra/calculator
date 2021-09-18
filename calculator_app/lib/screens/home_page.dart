@@ -1,6 +1,7 @@
 import 'package:calculator_app/widgets/value_text.dart';
 import 'package:flutter/material.dart';
 import 'package:calculator_app/widgets/calcu_buttons.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -18,17 +19,60 @@ class _MyHomePageState extends State<MyHomePage> {
   final Color buttonColor = const Color(0x2E2E2E2E);
   final Color textFunctionColor = const Color(0xFFFF9800);
   final Color textNormalColor = Colors.white;
-  String value = '';
+  String value = '0';
+  String operationText = '';
+  int digitCounter = 0;
+  String result = '';
 
   void buttonClick(String textValue) {
     setState(() {
-      value += textValue;
+      if (value == '0') {
+        value = textValue;
+      } else {
+        value += textValue;
+        // digitCounter++;
+        // if (digitCounter == 10) {
+        //   value += ('\n$textValue');
+        //   digitCounter = 0;
+        // }
+      }
+    });
+  }
+
+  void equalButtonClicked(String textValue) {
+    setState(() {
+      operationText = value;
+
+      operationText = operationText.replaceAll("x", "*");
+      operationText = operationText.replaceAll("÷", "/");
+
+      try {
+        Parser p = Parser();
+        Expression exp = p.parse(operationText);
+
+        ContextModel cm = ContextModel();
+        result = '${exp.evaluate(EvaluationType.REAL, cm)}';
+
+        value = result;
+      } catch (e) {
+        result = "Error";
+      }
+    });
+  }
+
+  void backSpaceClick(String textValue) {
+    setState(() {
+      value = value.substring(0, value.length - 1);
+      if (value == '') {
+        value = '0';
+      }
     });
   }
 
   void clearClick(String textValue) {
     setState(() {
-      value = '';
+      value = '0';
+      operationText = '';
     });
   }
 
@@ -44,7 +88,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 ValueText(value: value, textFunctionColor: textFunctionColor),
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.70,
+            height: MediaQuery.of(context).size.height * 0.10,
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 45),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [Text(operationText)],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.60,
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,22 +111,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     CalcuButtons(
                       text: "AC",
-                      bgColor: buttonColor,
+                      bgColor: operatorColor,
                       textColor: textFunctionColor,
                       isNormalButton: true,
                       callback: clearClick,
                     ),
                     CalcuButtons(
-                      text: "+/-",
-                      bgColor: buttonColor,
-                      textColor: textNormalColor,
+                      text: "C",
+                      bgColor: operatorColor,
+                      textColor: textFunctionColor,
                       isNormalButton: true,
-                      callback: buttonClick,
+                      callback: backSpaceClick,
                     ),
                     CalcuButtons(
                       text: "%",
-                      bgColor: buttonColor,
-                      textColor: textNormalColor,
+                      bgColor: operatorColor,
+                      textColor: textFunctionColor,
                       isNormalButton: true,
                       callback: buttonClick,
                     ),
@@ -208,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       bgColor: operatorColor,
                       textColor: textFunctionColor,
                       isNormalButton: false,
-                      callback: buttonClick,
+                      callback: equalButtonClicked,
                     ),
                   ],
                 ),

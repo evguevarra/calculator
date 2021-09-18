@@ -20,14 +20,17 @@ class _ValueTextState extends State<ValueText> {
     return Padding(
       padding: const EdgeInsets.only(right: 45.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(
-            widget.value,
-            style: TextStyle(
-              fontSize: 60,
-              color: widget.textFunctionColor,
+          FittedBox(
+            fit: BoxFit.contain,
+            child: Text(
+              widget.value,
+              style: TextStyle(
+                fontSize: 60,
+                color: widget.textFunctionColor,
+              ),
             ),
           ),
         ],
