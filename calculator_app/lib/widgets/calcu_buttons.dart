@@ -5,6 +5,7 @@ class CalcuButtons extends StatelessWidget {
   final Color bgColor;
   final Color textColor;
   final bool isNormalButton;
+  final Function callback;
 
   const CalcuButtons({
     Key? key,
@@ -12,6 +13,7 @@ class CalcuButtons extends StatelessWidget {
     required this.bgColor,
     required this.textColor,
     required this.isNormalButton,
+    required this.callback,
   }) : super(key: key);
 
   @override
@@ -20,7 +22,9 @@ class CalcuButtons extends StatelessWidget {
       height: 65,
       width: isNormalButton ? 65 : 140,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          callback(text);
+        },
         child: Text(
           text,
           style: TextStyle(
